@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Match Generator</title>
+    <!-- Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .match-events {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .match-events h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .match-events ul {
+            list-style: none;
+        }
+
+        .match-events li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+            color: #555;
+            transition: background-color 0.3s ease;
+        }
+
+        .match-events li:last-child {
+            border-bottom: none;
+        }
+
+        .match-events li:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Animation for match events */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .match-events li {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Football Match Generator</h1>
+    <form method="POST">
+        <label for="team1">Home Team:</label>
+        <input type="text" id="team1" name="team1" required>
+        <br>
+        <label for="team2">Away Team:</label>
+        <input type="text" id="team2" name="team2" required>
+        <br>
+        <label for="odds">How likely is it for the hosts to win? (10-90):</label>
+        <input type="number" id="odds" name="odds" min="10" max="90" required>
+        <br>
+        <label for="match_type">Match Type:</label>
+        <select id="match_type" name="match_type">
+            <option value="regular">Regular Match</option>
+            <option value="extra_time">Extra Time & Penalties</option>
+        </select>
+        <br>
+        <button type="submit">Generate Match</button>
+    </form>
+
+    {% if events %}
+    <div class="match-events">
+        <h2>Match Events:</h2>
+        <ul>
+            {% for event in events %}
+            <li>{{ event }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>

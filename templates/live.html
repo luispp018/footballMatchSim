@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Live Match</h1>
+    <div class="match-events">
+        <h2>Match Events:</h2>
+        <ul id="events-list">
+            <!-- Events will be populated here by JavaScript -->
+        </ul>
+    </div>
+    <script>
+        function fetchUpdates() {
+            fetch('/live_updates')
+                .then(response => response.json())
+                .then(data => {
+                    const eventsList = document.getElementById('events-list');
+                    eventsList.innerHTML = ''; // Clear previous events
+                    data.events.forEach(event => {
+                        const li = document.createElement('li');
+                        li.textContent = event;
+                        eventsList.appendChild(li);
+                    });
+                });
+        }
+
+        // Fetch updates every 3 seconds
+        setInterval(fetchUpdates, 3000);
+    </script>
+</body>
+</html>
